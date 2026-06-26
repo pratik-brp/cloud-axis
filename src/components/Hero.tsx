@@ -5,11 +5,13 @@ import cloudaxisLogo from '../assets/cloudaxis-logo.png'
 
 function Logo() {
   return (
-    <img
-      src={cloudaxisLogo}
-      alt="Cloud Axis"
-      className="h-10 md:h-12 w-auto object-contain"
-    />
+    <a href="/">
+      <img
+        src={cloudaxisLogo}
+        alt="Cloud Axis"
+        className="h-10 md:h-12 w-auto object-contain"
+      />
+    </a>
   )
 }
 
@@ -139,7 +141,7 @@ export default function Hero() {
               </div>
             </div>
 
-            <div className="relative flex items-center justify-center order-first lg:order-last animate-fade-in-scale animate-delay-100">
+            <div className="relative flex items-center justify-center animate-fade-in-scale animate-delay-100">
               <div
                 className="absolute w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] lg:w-[500px] lg:h-[500px] rounded-full pointer-events-none"
                 style={{
