@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import heroImage from '../assets/cloud-axis-hero-3d.png'
 import heroBackground from '../assets/Hero Section.jpg'
 import cloudaxisLogo from '../assets/cloudaxis-logo.png'
@@ -14,6 +15,33 @@ function Logo() {
 
 const navLinks = ['Home', 'About us', 'View Product', 'Pricing']
 
+function TypewriterHeading() {
+  const text = "The future\nis now"
+  const [count, setCount] = useState(0)
+  const done = count >= text.length
+  const nowStart = 14
+
+  useEffect(() => {
+    if (done) return
+    const t = setTimeout(() => setCount(c => c + 1), 90)
+    return () => clearTimeout(t)
+  }, [done, count])
+
+  return (
+    <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium leading-[1.05] tracking-tight text-white animate-fade-in-down animate-delay-200">
+      {text.split('').map((char, i) => (
+        <span key={i} className={i < count ? "" : "opacity-0"}>
+          {char === '\n' ? <br /> : (
+            <span className={i >= nowStart && i < nowStart + 3 ? "font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-blue-200" : ""}>
+              {char}
+            </span>
+          )}
+        </span>
+      ))}
+    </h1>
+  )
+}
+
 export default function Hero() {
   return (
     <div
@@ -28,7 +56,7 @@ export default function Hero() {
       <div className="absolute inset-0 bg-gradient-to-b from-[#020b1c]/40 via-transparent to-[#020b1c]/60 pointer-events-none" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_85%_40%,rgba(125,211,232,0.12),transparent_45%)] pointer-events-none" />
 
-      <nav className="relative z-30 px-6 md:px-12">
+      <nav className="relative z-30 px-6 md:px-12 animate-fade-in-down">
         <div className="max-w-7xl mx-auto flex items-center justify-between py-3 md:py-4">
           <Logo />
 
@@ -63,25 +91,21 @@ export default function Hero() {
         <div className="max-w-7xl mx-auto w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
             <div className="max-w-2xl">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.07] border border-white/10 text-xs font-medium tracking-wide text-cyan-200 mb-6">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.07] border border-white/10 text-xs font-medium tracking-wide text-cyan-200 mb-6 animate-fade-in-down animate-delay-100">
                 <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
                 Next-Gen Cloud Platform
               </div>
 
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium leading-[1.05] tracking-tight text-white">
-                The future
-                <br />
-                is <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-blue-200">now</span>
-              </h1>
+              <TypewriterHeading />
 
-              <p className="mt-6 text-base md:text-lg text-white/65 leading-relaxed max-w-lg">
+              <p className="mt-6 text-base md:text-lg text-white/65 leading-relaxed max-w-lg animate-fade-in-up animate-delay-300">
                 Cloud Axis delivers secure, scalable cloud infrastructure built for modern teams.
                 Deploy faster, scale effortlessly, and power your products with reliable compute,
                 storage, and networking - all from a single intelligent platform.
               </p>  
 
 
-              <div className="mt-8 max-w-md">
+              <div className="mt-8 max-w-md animate-fade-in-up animate-delay-400">
                 <div className="flex gap-3 p-1.5 rounded-full bg-white/[0.05] border border-white/10 backdrop-blur-sm">
                   <input
                     type="email"
@@ -97,7 +121,7 @@ export default function Hero() {
                 </p>
               </div>
 
-              <div className="mt-10 flex items-center gap-6 md:gap-8 flex-wrap text-white/50">
+              <div className="mt-10 flex items-center gap-6 md:gap-8 flex-wrap text-white/50 animate-fade-in-up animate-delay-500">
                 <div className="flex flex-col">
                   <span className="text-2xl font-bold text-white">99.99%</span>
                   <span className="text-xs tracking-wide uppercase">Uptime</span>
@@ -115,7 +139,7 @@ export default function Hero() {
               </div>
             </div>
 
-            <div className="relative flex items-center justify-center order-first lg:order-last">
+            <div className="relative flex items-center justify-center order-first lg:order-last animate-fade-in-scale animate-delay-100">
               <div
                 className="absolute w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] lg:w-[500px] lg:h-[500px] rounded-full pointer-events-none"
                 style={{
