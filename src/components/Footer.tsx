@@ -8,7 +8,7 @@ const navLinks = [
 ]
 
 const contactLinks = [
-  { label: 'hello@cloudaxis.com', href: 'mailto:hello@cloudaxis.com' },
+  { label: 'info@cloudaxisnp.com', href: 'mailto:info@cloudaxisnp.com' },
   { label: '+977-9812345789', href: 'tel:+977-9812345789' },
   { label: 'Baluwatar, Kathmandu, Nepal', href: 'https://maps.google.com/?q=Baluwatar+Kathmandu+Nepal' },
 ]

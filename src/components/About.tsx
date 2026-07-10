@@ -1,39 +1,6 @@
-import { useEffect, useRef, useState, type CSSProperties } from 'react'
+import { useState, useEffect, type CSSProperties } from 'react'
 import cloudaxisLogo from '../assets/cloudaxis-logo.png'
-
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   Intersection-Observer hooks
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-function useReveal(threshold = 0.15) {
-  const ref = useRef<HTMLElement>(null)
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    const obs = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) { el.classList.add('ab-visible'); obs.unobserve(el) } },
-      { threshold }
-    )
-    obs.observe(el)
-    return () => obs.disconnect()
-  }, [threshold])
-  return ref
-}
-
-function useInView(threshold = 0.2) {
-  const ref = useRef<HTMLDivElement>(null)
-  const [visible, setVisible] = useState(false)
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    const obs = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) { setVisible(true); obs.unobserve(el) } },
-      { threshold }
-    )
-    obs.observe(el)
-    return () => obs.disconnect()
-  }, [threshold])
-  return { ref, visible }
-}
+import { useReveal, useInView } from '../hooks/useReveal'
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    Animated counter
@@ -56,53 +23,6 @@ function useCountUp(target: number, duration: number, start: boolean) {
   }, [start, target, duration])
   return count
 }
-
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   Icons (SVG mini components)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-const IcoOrchestration = ({ color = '#67e8f9' }: { color?: string }) => (
-  <svg viewBox="0 0 24 24" fill="none" width="20" height="20">
-    <circle cx="12" cy="4" r="2.2" stroke={color} strokeWidth="1.4"/>
-    <circle cx="4" cy="20" r="2.2" stroke={color} strokeWidth="1.4"/>
-    <circle cx="20" cy="20" r="2.2" stroke={color} strokeWidth="1.4"/>
-    <path d="M12 6.2v6M12 12.2L4.5 18M12 12.2l7.5 5.8" stroke={color} strokeWidth="1.4" strokeLinecap="round"/>
-  </svg>
-)
-const IcoDatabase = ({ color = '#67e8f9' }: { color?: string }) => (
-  <svg viewBox="0 0 24 24" fill="none" width="20" height="20">
-    <ellipse cx="12" cy="6" rx="7.5" ry="3" stroke={color} strokeWidth="1.4"/>
-    <path d="M4.5 6v6c0 1.66 3.36 3 7.5 3s7.5-1.34 7.5-3V6" stroke={color} strokeWidth="1.4"/>
-    <path d="M4.5 12v6c0 1.66 3.36 3 7.5 3s7.5-1.34 7.5-3v-6" stroke={color} strokeWidth="1.4"/>
-  </svg>
-)
-const IcoCDN = ({ color = '#67e8f9' }: { color?: string }) => (
-  <svg viewBox="0 0 24 24" fill="none" width="20" height="20">
-    <circle cx="12" cy="12" r="8" stroke={color} strokeWidth="1.4"/>
-    <path d="M4 12h16M12 4c-2.2 2.2-3 4.5-3 8s.8 5.8 3 8M12 4c2.2 2.2 3 4.5 3 8s-.8 5.8-3 8" stroke={color} strokeWidth="1.4"/>
-  </svg>
-)
-const IcoAI = ({ color = '#67e8f9' }: { color?: string }) => (
-  <svg viewBox="0 0 24 24" fill="none" width="20" height="20">
-    <circle cx="12" cy="12" r="3.5" stroke={color} strokeWidth="1.4"/>
-    <path d="M12 2v3M12 19v3M2 12h3M19 12h3M5.1 5.1l2.1 2.1M16.8 16.8l2.1 2.1M5.1 18.9l2.1-2.1M16.8 7.2l2.1-2.1" stroke={color} strokeWidth="1.4" strokeLinecap="round"/>
-  </svg>
-)
-const IcoContainer = ({ color = '#67e8f9' }: { color?: string }) => (
-  <svg viewBox="0 0 24 24" fill="none" width="20" height="20">
-    <rect x="2" y="2" width="8.5" height="8.5" rx="1.5" stroke={color} strokeWidth="1.4"/>
-    <rect x="13.5" y="2" width="8.5" height="8.5" rx="1.5" stroke={color} strokeWidth="1.4"/>
-    <rect x="2" y="13.5" width="8.5" height="8.5" rx="1.5" stroke={color} strokeWidth="1.4"/>
-    <rect x="13.5" y="13.5" width="8.5" height="8.5" rx="1.5" stroke={color} strokeWidth="1.4"/>
-  </svg>
-)
-const IcoStorage = ({ color = '#67e8f9' }: { color?: string }) => (
-  <svg viewBox="0 0 24 24" fill="none" width="20" height="20">
-    <rect x="3" y="4.5" width="18" height="6" rx="1.5" stroke={color} strokeWidth="1.4"/>
-    <rect x="3" y="13.5" width="18" height="6" rx="1.5" stroke={color} strokeWidth="1.4"/>
-    <circle cx="18" cy="7.5" r="1.2" fill={color}/>
-    <circle cx="18" cy="16.5" r="1.2" fill={color}/>
-  </svg>
-)
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    Animated circuit board background
@@ -195,9 +115,9 @@ function StatPill({ value, label, suffix, prefix = '', delay, inView }: {
    ABOUT SECTION (exported)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 export default function About() {
-  const headerRef = useReveal(0.2)
-  const leftRef   = useReveal(0.15)
-  const rightRef  = useReveal(0.15)
+  const headerRef = useReveal<HTMLDivElement>(0.2, 'ab-visible')
+  const leftRef   = useReveal<HTMLDivElement>(0.15, 'ab-visible')
+  const rightRef  = useReveal<HTMLDivElement>(0.15, 'ab-visible')
   const { ref: statsRef, visible: statsVisible } = useInView(0.3)
 
   return (
@@ -222,7 +142,7 @@ export default function About() {
 
         {/* ── HEADER ── */}
         <div
-          ref={headerRef as React.RefObject<HTMLDivElement>}
+          ref={headerRef}
           className="ab-header ab-reveal-up"
         >
           <div className="ab-badge">
@@ -247,7 +167,7 @@ export default function About() {
         <div className="ab-grid">
 
           {/* LEFT CARD — Mission */}
-          <div ref={leftRef as React.RefObject<HTMLDivElement>} className="ab-reveal-left">
+          <div ref={leftRef} className="ab-reveal-left">
             <div className="ab-card ab-card-mission">
               {/* Card top accent line */}
               <div className="ab-card-accent"/>
@@ -277,7 +197,7 @@ export default function About() {
           </div>
 
           {/* RIGHT CARD — Platform */}
-          <div ref={rightRef as React.RefObject<HTMLDivElement>} className="ab-reveal-right">
+          <div ref={rightRef} className="ab-reveal-right">
             <div className="ab-card ab-card-platform">
               <div className="ab-card-accent ab-card-accent-alt"/>
 

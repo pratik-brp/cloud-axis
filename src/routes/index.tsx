@@ -5,12 +5,13 @@ import Services from '../components/Services'
 import Stats from '../components/Stats'
 import Contact from '../components/Contact'
 import Footer from '../components/Footer'
+import HeroSkeleton from '../components/HeroSkeleton'
 
 const Hero = lazy(() => import('../components/Hero'))
 
 export const Route = createFileRoute("/")({
   component: () => (
-    <Suspense fallback={<div className="min-h-screen bg-[#020b1c]" />}>
+    <Suspense fallback={<HeroSkeleton />}>
       <Hero />
       <About />
       <Services />
@@ -20,4 +21,3 @@ export const Route = createFileRoute("/")({
     </Suspense>
   ),
 })
-

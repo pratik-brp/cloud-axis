@@ -1,19 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
-
-function useReveal(threshold = 0.1) {
-  const ref = useRef<HTMLElement>(null)
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    const obs = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) { el.classList.add('visible'); obs.unobserve(el) } },
-      { threshold }
-    )
-    obs.observe(el)
-    return () => obs.disconnect()
-  }, [threshold])
-  return ref
-}
+import { useState } from 'react'
+import { useReveal } from '../hooks/useReveal'
 
 interface Service {
   icon: React.ReactNode
@@ -218,8 +204,8 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
 }
 
 export default function Services() {
-  const headerRef = useReveal()
-  const gridRef = useReveal(0.05)
+  const headerRef = useReveal<HTMLDivElement>(0.1, 'visible')
+  const gridRef = useReveal<HTMLDivElement>(0.05, 'visible')
 
   return (
     <section id="services" className="srv-section" aria-labelledby="services-heading">
@@ -232,7 +218,7 @@ export default function Services() {
       <div className="srv-divider-line" aria-hidden="true" />
 
       <div className="srv-container">
-        <header ref={headerRef as React.RefObject<HTMLDivElement>} className="srv-header reveal">
+        <header ref={headerRef} className="srv-header reveal">
           <span className="srv-badge">
             <span className="srv-badge-dot" aria-hidden="true" />
             Our Services
@@ -250,7 +236,7 @@ export default function Services() {
           </p>
         </header>
 
-        <div ref={gridRef as React.RefObject<HTMLDivElement>} className="srv-grid-wrapper reveal">
+        <div ref={gridRef} className="srv-grid-wrapper reveal">
           <div className="srv-grid">
             {services.map((service, i) => (
               <ServiceCard key={service.title} service={service} index={i} />

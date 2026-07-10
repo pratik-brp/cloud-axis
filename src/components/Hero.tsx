@@ -56,15 +56,7 @@ const platforms = [
       </svg>
     ),
   },
-  {
-    name: 'Vercel',
-    color: '#ffffff',
-    icon: (
-      <svg viewBox="0 0 24 24" className="h-5 w-5" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 2L2 19.5h20L12 2z" fill="#ffffff"/>
-      </svg>
-    ),
-  },
+ 
   {
     name: 'Kubernetes',
     color: '#326CE5',
@@ -95,7 +87,7 @@ function TypewriterHeading() {
     if (done) return
     const t = setTimeout(() => setCount(c => c + 1), 90)
     return () => clearTimeout(t)
-  }, [done, count])
+  }, [done, count, text])
 
   return (
     <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium leading-[1.05] tracking-tight text-white animate-fade-in-down animate-delay-200">
@@ -149,7 +141,7 @@ export default function Hero() {
 
       <Navbar />
 
-      <main className="relative z-20 flex items-center min-h-[calc(100vh-64px)] pt-20 sm:pt-16 px-4 sm:px-6 md:px-12 pb-6 sm:pb-8 md:pb-12">
+      <main className="relative z-20 flex items-center min-h-[calc(100dvh-64px)] pt-20 sm:pt-16 px-4 sm:px-6 md:px-12 pb-6 sm:pb-8 md:pb-12">
         <div className="max-w-7xl mx-auto w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
             <div className="w-full">

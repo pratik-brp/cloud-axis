@@ -1,19 +1,22 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, type FormEvent } from 'react'
+import { useReveal } from '../hooks/useReveal'
+import Button from './ui/Button'
 
-function useReveal(threshold = 0.1) {
-  const ref = useRef<HTMLElement>(null)
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    const obs = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) { el.classList.add('visible'); obs.unobserve(el) } },
-      { threshold }
-    )
-    obs.observe(el)
-    return () => obs.disconnect()
-  }, [threshold])
-  return ref
+interface FormData {
+  name: string
+  email: string
+  company: string
+  phone: string
+  message: string
 }
+
+interface FormErrors {
+  name?: string
+  email?: string
+  message?: string
+}
+
+type SubmitStatus = 'idle' | 'submitting' | 'success' | 'error'
 
 const contactInfo = [
   {
@@ -24,8 +27,8 @@ const contactInfo = [
       </svg>
     ),
     label: 'Email',
-    value: 'Hr@cloudaxis.com',
-    href: 'mailto:Hr@cloudaxis.com',
+    value: 'info@cloudaxisnp.com',
+    href: 'mailto:info@cloudaxisnp.com',
   },
   {
     icon: (
@@ -45,7 +48,7 @@ const contactInfo = [
       </svg>
     ),
     label: 'Office',
-    value: 'Baluwatar, Kathmandu, Nepal',
+    value: 'Baluwatar, Kathmandu, Nepal 44600',
     href: 'https://maps.google.com/?q=Baluwatar+Kathmandu+Nepal',
   },
   {
@@ -56,69 +59,75 @@ const contactInfo = [
       </svg>
     ),
     label: 'Business Hours',
-    value: 'Mon–Fri, 9:00 AM – 6:00 PM PST',
+    value: 'Mon\u2013Fri, 9:00 AM \u2013 5:00 PM NPT',
     href: null,
   },
 ]
 
-function FormField({
-  label,
-  id,
-  type = 'text',
-  placeholder,
-  required = false,
-  rows,
-}: {
-  label: string
-  id: string
-  type?: string
-  placeholder?: string
-  required?: boolean
-  rows?: number
-}) {
-  return (
-    <div className="con-field-group">
-      <label htmlFor={id} className="con-field-label">
-        {label}{required && <span className="con-asterisk">*</span>}
-      </label>
-      <div className="con-input-wrapper">
-        {rows ? (
-          <textarea
-            id={id}
-            rows={rows}
-            placeholder={placeholder}
-            required={required}
-            className="con-textarea"
-          />
-        ) : (
-          <input
-            id={id}
-            type={type}
-            placeholder={placeholder}
-            required={required}
-            className="con-input"
-            autoComplete={id === 'name' ? 'name' : id === 'email' ? 'email' : id === 'phone' ? 'tel' : 'off'}
-          />
-        )}
-        <div className="con-input-line" />
-      </div>
-    </div>
-  )
+function validate(data: FormData): FormErrors {
+  const errors: FormErrors = {}
+  if (!data.name.trim()) errors.name = 'Full name is required'
+  if (!data.email.trim()) {
+    errors.email = 'Email address is required'
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+    errors.email = 'Please enter a valid email address'
+  }
+  if (!data.message.trim()) errors.message = 'Message is required'
+  return errors
 }
 
 export default function Contact() {
-  const [submitted, setSubmitted] = useState(false)
-  const headerRef = useReveal()
-  const contentRef = useReveal(0.05)
+  const [formData, setFormData] = useState<FormData>({
+    name: '',
+    email: '',
+    company: '',
+    phone: '',
+    message: '',
+  })
+  const [errors, setErrors] = useState<FormErrors>({})
+  const [submitStatus, setSubmitStatus] = useState<SubmitStatus>('idle')
+  const headerRef = useReveal<HTMLDivElement>(0.1, 'visible')
+  const contentRef = useReveal<HTMLDivElement>(0.05, 'visible')
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const updateField = (field: keyof FormData, value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }))
+    if (errors[field as keyof FormErrors]) {
+      setErrors((prev) => {
+        const next = { ...prev }
+        delete next[field as keyof FormErrors]
+        return next
+      })
+    }
+  }
+
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    setSubmitted(true)
+    const validationErrors = validate(formData)
+    setErrors(validationErrors)
+    if (Object.keys(validationErrors).length > 0) return
+
+    setSubmitStatus('submitting')
+    try {
+      const res = await fetch('https://formsubmit.co/ajax/info@cloudaxisnp.com', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      })
+      if (!res.ok) throw new Error('Failed to send')
+      setSubmitStatus('success')
+    } catch {
+      setSubmitStatus('error')
+    }
+  }
+
+  const resetForm = () => {
+    setFormData({ name: '', email: '', company: '', phone: '', message: '' })
+    setErrors({})
+    setSubmitStatus('idle')
   }
 
   return (
     <section id="contact" className="con-section" aria-labelledby="contact-heading">
-      {/* Visual background layers */}
       <div className="con-dot-pattern" aria-hidden="true" />
       <div className="con-glow-top" aria-hidden="true" />
       <div className="con-glow-bottom-left" aria-hidden="true" />
@@ -126,17 +135,14 @@ export default function Contact() {
       <div className="con-border-line" aria-hidden="true" />
 
       <div className="con-container">
-        {/* Section Header */}
-        <header ref={headerRef as React.RefObject<HTMLDivElement>} className="con-header reveal">
+        <header ref={headerRef} className="con-header reveal">
           <span className="con-badge">
             <span className="con-badge-dot" aria-hidden="true" />
             Get in touch
           </span>
           <h2 id="contact-heading" className="con-title">
-            Let's discuss your{' '}
-            <span className="con-title-gradient">
-              cloud infrastructure
-            </span>{' '}
+            Let&apos;s discuss your{' '}
+            <span className="con-title-gradient">cloud infrastructure</span>{' '}
             needs
           </h2>
           <p className="con-subtitle">
@@ -144,91 +150,177 @@ export default function Contact() {
           </p>
         </header>
 
-        {/* Two columns (Form left, info right) */}
-        <div ref={contentRef as React.RefObject<HTMLDivElement>} className="con-grid reveal">
-          
-          {/* Left Column: Form */}
+        <div ref={contentRef} className="con-grid reveal">
           <div className="con-col-left">
             <div className="con-card-form">
               <div className="con-card-glow" />
               <div className="con-card-accent" />
-              
-              <div className="con-form-container">
-                <h3 className="con-form-title">Send us a message</h3>
-                <p className="con-form-subtitle">
-                  Fill out the form below and we'll get back to you shortly.
-                </p>
 
-                {!submitted ? (
-                  <form onSubmit={handleSubmit} className="con-form">
-                    <div className="con-form-row">
-                      <FormField label="Full Name" id="name" placeholder="Your name" required />
-                      <FormField label="Email Address" id="email" type="email" placeholder="Your email" required />
-                    </div>
-                    <div className="con-form-row">
-                      <FormField label="Company Name" id="company" placeholder="Your company" />
-                      <FormField label="Phone Number" id="phone" type="tel" placeholder="Your phone" />
-                    </div>
-                    <FormField
-                      label="Message"
-                      id="message"
-                      placeholder="Tell us about your cloud infrastructure needs, project scope, and timeline..."
-                      required
-                      rows={4}
-                    />
-                    
-                    <button type="submit" className="con-submit-btn">
-                      <span>Send Message</span>
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="con-btn-arrow">
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                        <polyline points="12 5 19 12 12 19"></polyline>
-                      </svg>
-                    </button>
-                  </form>
-                ) : (
+              <div className="con-form-container">
+                {submitStatus === 'success' ? (
                   <div className="con-success-container">
                     <div className="con-success-icon-box">
                       <svg viewBox="0 0 24 24" fill="none" className="con-success-icon" aria-hidden="true">
-                        <circle cx="12" cy="12" r="10" className="con-success-circle" />
-                        <path d="M8 12l3 3 5-5" className="con-success-path" />
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.5" />
+                        <path d="M8 12l3 3 5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     </div>
                     <h4 className="con-success-title">Message sent successfully!</h4>
                     <p className="con-success-text">
                       Thank you for reaching out. Our team will review your inquiry and get back to you within 24 hours.
                     </p>
-                    <button onClick={() => setSubmitted(false)} className="con-reset-btn">
+                    <button onClick={resetForm} className="con-reset-btn">
                       Send another message
                     </button>
                   </div>
+                ) : (
+                  <>
+                    <h3 className="con-form-title">Send us a message</h3>
+                    <p className="con-form-subtitle">
+                      Fill out the form below and we&apos;ll get back to you shortly.
+                    </p>
+
+                    {submitStatus === 'error' && (
+                      <div className="mb-6 p-4 rounded-lg bg-red-500/10 border border-red-500/20 text-red-300 text-sm" role="alert">
+                        Failed to send message. Please try again or email us directly at{' '}
+                        <a href="mailto:info@cloudaxisnp.com" className="underline">info@cloudaxisnp.com</a>.
+                      </div>
+                    )}
+
+                    <form onSubmit={handleSubmit} className="con-form" noValidate>
+                      <div className="con-form-row">
+                        <div className="con-field-group">
+                          <label htmlFor="name" className="con-field-label">
+                            Full Name <span className="con-asterisk">*</span>
+                          </label>
+                          <div className="con-input-wrapper">
+                            <input
+                              id="name"
+                              type="text"
+                              placeholder="Your name"
+                              value={formData.name}
+                              onChange={(e) => updateField('name', e.target.value)}
+                              aria-invalid={!!errors.name}
+                              aria-describedby={errors.name ? 'name-error' : undefined}
+                              className={`con-input ${errors.name ? '!border-red-400/50' : ''}`}
+                            />
+                            <div className="con-input-line" />
+                          </div>
+                          {errors.name && (
+                            <p id="name-error" className="text-red-400 text-xs mt-1" role="alert">{errors.name}</p>
+                          )}
+                        </div>
+                        <div className="con-field-group">
+                          <label htmlFor="email" className="con-field-label">
+                            Email Address <span className="con-asterisk">*</span>
+                          </label>
+                          <div className="con-input-wrapper">
+                            <input
+                              id="email"
+                              type="email"
+                              placeholder="Your email"
+                              value={formData.email}
+                              onChange={(e) => updateField('email', e.target.value)}
+                              aria-invalid={!!errors.email}
+                              aria-describedby={errors.email ? 'email-error' : undefined}
+                              autoComplete="email"
+                              className={`con-input ${errors.email ? '!border-red-400/50' : ''}`}
+                            />
+                            <div className="con-input-line" />
+                          </div>
+                          {errors.email && (
+                            <p id="email-error" className="text-red-400 text-xs mt-1" role="alert">{errors.email}</p>
+                          )}
+                        </div>
+                      </div>
+                      <div className="con-form-row">
+                        <div className="con-field-group">
+                          <label htmlFor="company" className="con-field-label">Company Name</label>
+                          <div className="con-input-wrapper">
+                            <input
+                              id="company"
+                              type="text"
+                              placeholder="Your company"
+                              value={formData.company}
+                              onChange={(e) => updateField('company', e.target.value)}
+                              className="con-input"
+                            />
+                            <div className="con-input-line" />
+                          </div>
+                        </div>
+                        <div className="con-field-group">
+                          <label htmlFor="phone" className="con-field-label">Phone Number</label>
+                          <div className="con-input-wrapper">
+                            <input
+                              id="phone"
+                              type="tel"
+                              placeholder="Your phone"
+                              value={formData.phone}
+                              onChange={(e) => updateField('phone', e.target.value)}
+                              autoComplete="tel"
+                              className="con-input"
+                            />
+                            <div className="con-input-line" />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="con-field-group">
+                        <label htmlFor="message" className="con-field-label">
+                          Message <span className="con-asterisk">*</span>
+                        </label>
+                        <div className="con-input-wrapper">
+                          <textarea
+                            id="message"
+                            rows={4}
+                            placeholder="Tell us about your cloud infrastructure needs, project scope, and timeline..."
+                            value={formData.message}
+                            onChange={(e) => updateField('message', e.target.value)}
+                            aria-invalid={!!errors.message}
+                            aria-describedby={errors.message ? 'message-error' : undefined}
+                            className={`con-textarea ${errors.message ? '!border-red-400/50' : ''}`}
+                          />
+                          <div className="con-input-line" />
+                        </div>
+                        {errors.message && (
+                          <p id="message-error" className="text-red-400 text-xs mt-1" role="alert">{errors.message}</p>
+                        )}
+                      </div>
+
+                      <Button
+                        variant="gradient"
+                        type="submit"
+                        loading={submitStatus === 'submitting'}
+                        disabled={submitStatus === 'submitting'}
+                        className="w-full !rounded-xl !py-3"
+                      >
+                        <span>Send Message</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
+                          <line x1="5" y1="12" x2="19" y2="12" />
+                          <polyline points="12 5 19 12 12 19" />
+                        </svg>
+                      </Button>
+                    </form>
+                  </>
                 )}
               </div>
             </div>
           </div>
 
-          {/* Right Column: Info & Map */}
           <div className="con-col-right">
-            
-            {/* Info card */}
             <div className="con-card-info">
               <div className="con-card-glow" />
               <div className="con-card-accent-blue" />
-              
+
               <div className="con-info-container">
                 <h3 className="con-info-title">Contact Information</h3>
-                
                 <div className="con-info-list">
-                  {contactInfo.map((item, idx) => (
-                    <div key={item.label} className="con-info-item group" style={{ animationDelay: `${idx * 100}ms` }}>
-                      <div className="con-info-icon-box">
-                        {item.icon}
-                      </div>
+                  {contactInfo.map((item) => (
+                    <div key={item.label} className="con-info-item group">
+                      <div className="con-info-icon-box">{item.icon}</div>
                       <div className="con-info-content">
                         <span className="con-info-label">{item.label}</span>
                         {item.href ? (
-                          <a href={item.href} className="con-info-link">
-                            {item.value}
-                          </a>
+                          <a href={item.href} className="con-info-link">{item.value}</a>
                         ) : (
                           <span className="con-info-value">{item.value}</span>
                         )}
@@ -239,7 +331,6 @@ export default function Contact() {
               </div>
             </div>
 
-            {/* Map Frame Card */}
             <div className="con-card-map">
               <div className="con-map-overlay" aria-hidden="true" />
               <iframe
@@ -247,7 +338,6 @@ export default function Contact() {
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
-                allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 title="Cloud Axis office location"
@@ -257,7 +347,6 @@ export default function Contact() {
                 Baluwatar, Kathmandu, Nepal
               </div>
             </div>
-
           </div>
         </div>
       </div>
