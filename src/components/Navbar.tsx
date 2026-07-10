@@ -77,7 +77,14 @@ export default function Navbar() {
         : 'bg-transparent'
     }`}>
       <div className="max-w-7xl mx-auto flex items-center justify-between py-3 md:py-4">
-        <a href="/" onClick={(e) => { e.preventDefault(); navigate({ to: '/' }) }}>
+        <a href="/" onClick={(e) => {
+            e.preventDefault()
+            if (isHome) {
+              window.scrollTo({ top: 0, behavior: 'smooth' })
+            } else {
+              navigate({ to: '/' })
+            }
+          }}>
           <img
             src={cloudaxisLogo}
             alt="Cloud Axis"
