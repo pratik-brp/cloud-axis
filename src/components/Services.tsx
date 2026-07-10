@@ -211,24 +211,7 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
         <p className="srv-solution-text">{service.solution}</p>
 
         {/* Action Link Footer */}
-        <div className="srv-card-footer">
-          <span className="srv-learn-more">
-            Learn more
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 12 12"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="srv-arrow-icon"
-            >
-              <path d="M2 6h8M7 3l3 3-3 3" />
-            </svg>
-          </span>
-        </div>
+      
       </div>
     </div>
   )

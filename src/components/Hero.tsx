@@ -149,103 +149,95 @@ export default function Hero() {
 
       <Navbar />
 
-      <main className="relative z-20 flex items-center min-h-[calc(100vh-80px)] px-6 md:px-12 py-8 md:py-12">
+      <main className="relative z-20 flex items-center min-h-[calc(100vh-64px)] pt-20 sm:pt-16 px-4 sm:px-6 md:px-12 pb-6 sm:pb-8 md:pb-12">
         <div className="max-w-7xl mx-auto w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
-            <div className="max-w-2xl">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.07] border border-white/10 text-xs font-medium tracking-wide text-cyan-200 mb-6 animate-fade-in-down animate-delay-100">
-                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
+            <div className="w-full">
+              <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full bg-white/[0.07] border border-white/10 text-xs font-medium tracking-wide text-cyan-200 mb-5 sm:mb-6 animate-fade-in-down animate-delay-100">
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse flex-shrink-0" />
                 Next-Gen Cloud Platform
               </div>
 
               <TypewriterHeading />
 
-              <p className="mt-6 text-base md:text-lg text-white/65 leading-relaxed max-w-lg animate-fade-in-up animate-delay-300">
+              <p className="mt-4 sm:mt-6 text-sm sm:text-base md:text-lg text-white/65 leading-relaxed animate-fade-in-up animate-delay-300">
                 Cloud Axis delivers secure, scalable cloud infrastructure built for modern teams.
                 Deploy faster, scale effortlessly, and power your products with reliable compute,
                 storage, and networking - all from a single intelligent platform.
-              </p>  
+              </p>
 
-
-              <div className="mt-8 max-w-md animate-fade-in-up animate-delay-400">
-                <div className="flex gap-3 p-1.5 rounded-full bg-white/[0.05] border border-white/10 backdrop-blur-sm">
+              <div className="mt-5 sm:mt-8 w-full max-w-md animate-fade-in-up animate-delay-400">
+                <div className="flex flex-col gap-2 p-1.5 rounded-2xl bg-white/[0.05] border border-white/10 backdrop-blur-sm">
                   <input
                     type="email"
                     placeholder="Enter your email"
-                    className="flex-1 min-w-0 px-5 py-3 rounded-full bg-white/[0.04] text-white text-sm placeholder:text-white/35 outline-none focus:bg-white/[0.08] focus:ring-1 focus:ring-cyan-300/30 transition-all duration-200"
+                    className="w-full px-4 py-3 rounded-xl bg-white/[0.04] text-white text-sm placeholder:text-white/35 outline-none focus:bg-white/[0.08] focus:ring-1 focus:ring-cyan-300/30 transition-all duration-200"
                   />
-                  <button className="px-6 py-3 rounded-full text-sm font-semibold text-white bg-gradient-to-b from-[#5cb8f0] to-[#2b7fc0] hover:from-[#6fc3f7] hover:to-[#3a8fd1] transition-all duration-200 shadow-lg shadow-blue-500/25 whitespace-nowrap">
+                  <button className="w-full px-5 py-3 rounded-xl text-sm font-semibold text-white bg-gradient-to-b from-[#5cb8f0] to-[#2b7fc0] hover:from-[#6fc3f7] hover:to-[#3a8fd1] transition-all duration-200 shadow-lg shadow-blue-500/25">
                     Get Started
                   </button>
                 </div>
-                <p className="mt-3 text-white/40 text-xs md:text-sm pl-4">
+                <p className="mt-2 text-white/40 text-xs pl-2">
                   Start your 14-day trial. No credit card required.
                 </p>
               </div>
 
-              <div className="mt-10 flex items-center gap-6 md:gap-8 flex-wrap text-white/50 animate-fade-in-up animate-delay-500">
+              <div className="mt-6 sm:mt-8 flex items-center gap-5 sm:gap-8 text-white/50 animate-fade-in-up animate-delay-500">
                 <div className="flex flex-col">
-                  <span className="text-2xl font-bold text-white">99.99%</span>
-                  <span className="text-xs tracking-wide uppercase">Uptime</span>
+                  <span className="text-xl sm:text-2xl font-bold text-white">99.99%</span>
+                  <span className="text-[10px] sm:text-xs tracking-wide uppercase">Uptime</span>
                 </div>
-                <div className="w-px h-10 bg-white/10" />
+                <div className="w-px h-8 bg-white/10" />
                 <div className="flex flex-col">
-                  <span className="text-2xl font-bold text-white">99.99%</span>
-                  <span className="text-xs tracking-wide uppercase">SLA Guarantee</span>
+                  <span className="text-xl sm:text-2xl font-bold text-white">99.99%</span>
+                  <span className="text-[10px] sm:text-xs tracking-wide uppercase">SLA Guarantee</span>
                 </div>
-                <div className="w-px h-10 bg-white/10" />
+                <div className="w-px h-8 bg-white/10" />
                 <div className="flex flex-col">
-                  <span className="text-2xl font-bold text-white">24/7</span>
-                  <span className="text-xs tracking-wide uppercase">Support</span>
+                  <span className="text-xl sm:text-2xl font-bold text-white">24/7</span>
+                  <span className="text-[10px] sm:text-xs tracking-wide uppercase">Support</span>
                 </div>
               </div>
             </div>
 
-            <div className="relative flex items-center justify-center animate-fade-in-scale animate-delay-100">
+            {/* Hero image — hidden on small mobile, shown from sm up */}
+            <div className="hidden sm:flex relative items-center justify-center animate-fade-in-scale animate-delay-100">
               <div
-                className="absolute w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] lg:w-[500px] lg:h-[500px] rounded-full pointer-events-none"
-                style={{
-                  background: 'radial-gradient(circle, rgba(255,255,255,0.85) 0%, rgba(200,235,245,0.35) 40%, rgba(20,70,120,0.05) 70%, transparent 80%)',
-                }}
+                className="absolute w-[280px] h-[280px] sm:w-[360px] sm:h-[360px] md:w-[440px] md:h-[440px] lg:w-[500px] lg:h-[500px] rounded-full pointer-events-none"
+                style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.85) 0%, rgba(200,235,245,0.35) 40%, rgba(20,70,120,0.05) 70%, transparent 80%)' }}
               />
               <div
-                className="absolute w-[280px] h-[280px] sm:w-[360px] sm:h-[360px] lg:w-[440px] lg:h-[440px] rounded-full pointer-events-none"
-                style={{
-                  background: 'radial-gradient(circle, rgba(127,217,217,0.35) 0%, transparent 70%)',
-                  filter: 'blur(60px)',
-                }}
+                className="absolute w-[240px] h-[240px] sm:w-[300px] sm:h-[300px] md:w-[380px] md:h-[380px] lg:w-[440px] lg:h-[440px] rounded-full pointer-events-none"
+                style={{ background: 'radial-gradient(circle, rgba(127,217,217,0.35) 0%, transparent 70%)', filter: 'blur(60px)' }}
               />
-              <img
-                src={heroImage}
-                alt="Cloud Axis 3D cloud infrastructure visualization"
-                className="animate-float"
-              />
+              <img src={heroImage} alt="Cloud Axis 3D cloud infrastructure visualization" className="animate-float max-w-full" />
             </div>
           </div>
         </div>
       </main>
 
       {/* ── PLATFORM SIGNALS ── */}
-      <section className="relative z-20 px-6 md:px-12 pb-16">
+      <section className="relative z-20 px-4 sm:px-6 md:px-12 pb-10 sm:pb-16">
         <div className="mx-auto max-w-7xl">
-          <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] backdrop-blur-2xl shadow-[0_8px_40px_rgba(0,0,0,0.35)]">
-            <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-[500px] h-[180px] bg-cyan-400/8 blur-3xl pointer-events-none rounded-full" />
-            <div className="flex flex-col gap-2 px-6 py-5 md:flex-row md:items-center md:justify-between border-b border-white/8">
+          <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-2xl shadow-[0_8px_40px_rgba(0,0,0,0.35)]">
+            <div className="flex flex-col gap-1.5 px-4 sm:px-6 py-4 md:flex-row md:items-center md:justify-between border-b border-white/[0.08]">
               <div>
-                <span className="inline-flex items-center gap-1.5 text-[10px] uppercase tracking-[0.32em] text-cyan-300/70 font-medium">
+                <span className="inline-flex items-center gap-1.5 text-[10px] uppercase tracking-[0.28em] text-cyan-300/70 font-medium">
                   <span className="w-1 h-1 rounded-full bg-cyan-400 animate-pulse" />
-                    Platform signals
+                  Platform signals
                 </span>
-                <h3 className="mt-1 text-base md:text-lg font-semibold text-white/90 tracking-tight">Ecosystem we power</h3>
+                <h3 className="mt-0.5 text-sm sm:text-base font-semibold text-white/90 tracking-tight">Ecosystem we power</h3>
               </div>
-              <p className="max-w-xs text-xs text-white/40 leading-5">
-                 Deeply integrated with the tools your team already runs on.
+              <p className="text-xs text-white/40 leading-5 max-w-[260px]">
+                Deeply integrated with the tools your team already runs on.
               </p>
             </div>
-            <div className="marquee py-2">
+            <div className="marquee py-1.5">
               <div className="marquee-track">
                 {[...platforms, ...platforms].map((platform, index) => (
-                  <div key={`${platform.name}-${index}`} className="platform-pill" style={{ borderColor: platform.color + '40' }}>
+                  <div key={`${platform.name}-${index}`}
+                    className="platform-pill"
+                    style={{ borderColor: platform.color + '40', minWidth:'8rem', padding:'0.7rem 1rem', fontSize:'0.85rem' }}>
                     <span className="shrink-0">{platform.icon}</span>
                     <span>{platform.name}</span>
                   </div>
