@@ -24,8 +24,8 @@ const contactInfo = [
       </svg>
     ),
     label: 'Email',
-    value: 'hello@cloudaxis.com',
-    href: 'mailto:hello@cloudaxis.com',
+    value: 'Hr@cloudaxis.com',
+    href: 'mailto:Hr@cloudaxis.com',
   },
   {
     icon: (
