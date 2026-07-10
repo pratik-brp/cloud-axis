@@ -24,60 +24,76 @@ export default function Footer() {
   }
 
   return (
-    <footer className="relative bg-[#020b1c] overflow-hidden" role="contentinfo" aria-label="Site footer">
-      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-cyan-400/25 to-transparent" aria-hidden="true" />
+    <footer className="ft-footer" role="contentinfo" aria-label="Site footer">
+      {/* Top separator glowing edge */}
+      <div className="ft-top-line" aria-hidden="true" />
+      <div className="ft-ambient-glow" aria-hidden="true" />
 
-      <div className="relative mx-auto max-w-7xl px-6 md:px-12 pt-16 pb-6">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8 pb-12 border-b border-white/[0.06]">
-          <div className="md:col-span-5 lg:col-span-4 space-y-4">
-            <a href="/" onClick={(e) => { e.preventDefault(); handleNavClick(e, '#hero') }} aria-label="Cloud Axis home">
-              <img src={cloudaxisLogo} alt="Cloud Axis" className="h-9 w-auto object-contain" />
+      <div className="ft-container">
+        <div className="ft-grid">
+          
+          {/* Brand Info Column */}
+          <div className="ft-col-brand">
+            <a
+              href="/"
+              onClick={(e) => { e.preventDefault(); handleNavClick(e, '#hero') }}
+              aria-label="Cloud Axis home"
+              className="ft-logo-link"
+            >
+              <img src={cloudaxisLogo} alt="Cloud Axis Logo" className="ft-logo-img" />
             </a>
-            <p className="text-sm text-white/40 leading-7 max-w-[260px]">
+            <p className="ft-brand-desc">
               Cloud infrastructure for teams that demand reliability, speed, and security — without the complexity.
             </p>
           </div>
 
-          <nav className="md:col-span-3 lg:col-span-2" aria-label="Navigation links">
-            <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-white/30 mb-5">Navigation</h3>
-            <ul className="space-y-3">
+          {/* Navigation Links Column */}
+          <nav className="ft-col-nav" aria-label="Navigation links">
+            <h3 className="ft-col-title">Navigation</h3>
+            <ul className="ft-links-list">
               {navLinks.map((link) => (
                 <li key={link.label}>
                   <a
                     href={link.href}
                     onClick={(e) => handleNavClick(e, link.href)}
-                    className="footer-link text-sm"
+                    className="ft-link"
                   >
-                    {link.label}
+                    <span className="ft-link-text">{link.label}</span>
+                    <span className="ft-link-line" />
                   </a>
                 </li>
               ))}
             </ul>
           </nav>
 
-          <div className="md:col-span-4 lg:col-span-3" aria-label="Contact information">
-            <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-white/30 mb-5">Contact</h3>
-            <ul className="space-y-3">
+          {/* Contact Details Column */}
+          <div className="ft-col-contact" aria-label="Contact information">
+            <h3 className="ft-col-title">Contact</h3>
+            <ul className="ft-links-list">
               {contactLinks.map((link) => (
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="footer-link text-sm"
+                    className="ft-link"
                     target={link.href.startsWith('http') ? '_blank' : undefined}
                     rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                   >
-                    {link.label}
+                    <span className="ft-link-text">{link.label}</span>
+                    <span className="ft-link-line" />
                   </a>
                 </li>
               ))}
             </ul>
           </div>
+          
         </div>
 
-        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-white/25">
+        {/* Footer Bottom copyright bar */}
+        <div className="ft-bottom-bar">
+          <p className="ft-copyright">
             &copy; {year} Cloud Axis Pvt. Ltd. All rights reserved.
           </p>
+          <div className="ft-bottom-decor" />
         </div>
       </div>
     </footer>

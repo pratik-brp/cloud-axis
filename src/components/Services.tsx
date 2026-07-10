@@ -29,7 +29,7 @@ interface Service {
 const services: Service[] = [
   {
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
         <path d="M12 16v-8" />
         <path d="M9 11l3-3 3 3" />
         <path d="M22 12h-5l-2 3H9l-2-3H2" />
@@ -43,11 +43,11 @@ const services: Service[] = [
     gradientFrom: '#22d3ee',
     gradientTo: '#3b82f6',
     accentColor: '#22d3ee',
-    glowColor: 'rgba(34,211,238,0.18)',
+    glowColor: 'rgba(34,211,238,0.2)',
   },
   {
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
         <path d="M5 5h4l4 4" />
         <path d="M19 5h-4l-4 4" />
         <path d="M5 19h4l4-4" />
@@ -62,11 +62,11 @@ const services: Service[] = [
     gradientFrom: '#3b82f6',
     gradientTo: '#818cf8',
     accentColor: '#60a5fa',
-    glowColor: 'rgba(96,165,250,0.18)',
+    glowColor: 'rgba(96,165,250,0.2)',
   },
   {
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
         <rect x="2" y="3" width="20" height="8" rx="2" />
         <rect x="2" y="13" width="20" height="8" rx="2" />
         <path d="M6 7h.01" />
@@ -79,11 +79,11 @@ const services: Service[] = [
     gradientFrom: '#34d399',
     gradientTo: '#14b8a6',
     accentColor: '#34d399',
-    glowColor: 'rgba(52,211,153,0.18)',
+    glowColor: 'rgba(52,211,153,0.2)',
   },
   {
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
         <path d="M21 12a9 9 0 1 1-9-9" />
         <path d="M12 6v6l3 2" />
         <path d="M21 3v6h-6" />
@@ -95,11 +95,11 @@ const services: Service[] = [
     gradientFrom: '#8b5cf6',
     gradientTo: '#ec4899',
     accentColor: '#a78bfa',
-    glowColor: 'rgba(167,139,250,0.18)',
+    glowColor: 'rgba(167,139,250,0.2)',
   },
   {
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
         <path d="M22 12h-4l-3 4-4-8-3 4H2" />
         <circle cx="12" cy="12" r="10" />
         <path d="M12 2v4" />
@@ -112,11 +112,11 @@ const services: Service[] = [
     gradientFrom: '#f43f5e',
     gradientTo: '#f97316',
     accentColor: '#f43f5e',
-    glowColor: 'rgba(244,63,94,0.18)',
+    glowColor: 'rgba(244,63,94,0.2)',
   },
   {
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
         <path d="M12 2v20" />
         <path d="M17 6H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
         <path d="M6 17h2" />
@@ -128,11 +128,11 @@ const services: Service[] = [
     gradientFrom: '#f59e0b',
     gradientTo: '#eab308',
     accentColor: '#fbbf24',
-    glowColor: 'rgba(251,191,36,0.18)',
+    glowColor: 'rgba(251,191,36,0.2)',
   },
   {
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
         <path d="M12 2l7 3v5c0 4-3 7-7 8-4-1-7-4-7-8V5l7-3z" />
         <path d="M9 12l2 2 4-4" />
         <path d="M6 17l-2 3" />
@@ -145,11 +145,11 @@ const services: Service[] = [
     gradientFrom: '#14b8a6',
     gradientTo: '#22d3ee',
     accentColor: '#22d3ee',
-    glowColor: 'rgba(34,211,238,0.18)',
+    glowColor: 'rgba(34,211,238,0.2)',
   },
   {
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
         <rect x="3" y="11" width="18" height="11" rx="2" />
         <path d="M7 11V7a5 5 0 0 1 10 0v4" />
         <circle cx="12" cy="16" r="1" />
@@ -161,128 +161,73 @@ const services: Service[] = [
     gradientFrom: '#22c55e',
     gradientTo: '#06b6d4',
     accentColor: '#4ade80',
-    glowColor: 'rgba(74,222,128,0.18)',
+    glowColor: 'rgba(74,222,128,0.2)',
   },
 ]
 
 function ServiceCard({ service, index }: { service: Service; index: number }) {
   const [isHovered, setIsHovered] = useState(false)
 
-  const baseShadow = '0 8px 32px -8px rgba(0,0,0,0.4)'
-  const hoverShadow = `0 40px 80px -16px rgba(0,0,0,0.6), 0 0 0 1px ${service.accentColor}12, 0 0 80px ${service.glowColor}`
-
   return (
     <div
-      className="group"
-      style={{ animation: `fadeInUp 0.6s cubic-bezier(0.16,1,0.3,1) both`, animationDelay: `${index * 80}ms` }}
+      className="srv-card-wrapper"
+      style={{
+        animation: `fadeInUp 0.6s cubic-bezier(0.16,1,0.3,1) both`,
+        animationDelay: `${index * 80}ms`,
+      }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       <div
-        className="relative h-full rounded-2xl overflow-hidden cursor-default transition-all duration-200 ease-out"
+        className={`srv-card ${isHovered ? 'srv-hovered' : ''}`}
         style={{
-          background: `linear-gradient(160deg, rgba(255,255,255,${isHovered ? '0.04' : '0.025'}) 0%, rgba(255,255,255,${isHovered ? '0.01' : '0.005'}) 100%)`,
-          border: `1px solid ${isHovered ? `${service.accentColor}35` : 'rgba(255,255,255,0.06)'}`,
-          boxShadow: isHovered ? hoverShadow : baseShadow,
-          transform: isHovered ? 'translateY(-4px)' : 'translateY(0)',
-        }}
+          '--accent-color': service.accentColor,
+          '--glow-color': service.glowColor,
+          '--grad-from': service.gradientFrom,
+          '--grad-to': service.gradientTo,
+        } as React.CSSProperties}
       >
-        <div
-          className="absolute top-0 left-0 right-0 h-[3px] transition-all duration-200"
-          style={{
-            background: `linear-gradient(90deg, ${service.gradientFrom}, ${service.gradientTo})`,
-            opacity: isHovered ? 1 : 0.5,
-            boxShadow: isHovered ? `0 0 24px ${service.glowColor}` : 'none',
-          }}
-        />
+        {/* Top colorful gradient highlight bar */}
+        <div className="srv-card-top-glow" />
 
-        <div
-          className="absolute -top-24 -right-24 w-64 h-64 transition-all duration-300 pointer-events-none"
-          style={{
-            background: `radial-gradient(circle, ${service.glowColor}, transparent 70%)`,
-            opacity: isHovered ? 1 : 0,
-            transform: isHovered ? 'scale(1.2)' : 'scale(0.8)',
-          }}
-        />
+        {/* Ambient glow behind card */}
+        <div className="srv-card-bg-glow" />
 
-        <div className="relative z-10 p-7 md:p-8 flex flex-col h-full">
-          <div className="flex items-start gap-4 mb-5">
-            <div
-              className="relative flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-200"
-              style={{
-                background: `linear-gradient(135deg, ${service.gradientFrom}20, ${service.gradientTo}12)`,
-                border: `1px solid ${isHovered ? `${service.accentColor}35` : `${service.accentColor}18`}`,
-                color: isHovered ? service.accentColor : 'rgba(255,255,255,0.65)',
-                transform: isHovered ? 'scale(1.06) rotate(-2deg)' : 'scale(1) rotate(0deg)',
-                boxShadow: isHovered ? `0 0 28px ${service.glowColor}` : 'none',
-              }}
-            >
-              {service.icon}
-            </div>
-
-            <h3
-              className="text-lg font-bold leading-tight pt-1 transition-colors duration-150"
-              style={{ color: isHovered ? 'white' : 'rgba(255,255,255,0.9)' }}
-            >
-              {service.title}
-            </h3>
+        {/* Card Header area */}
+        <div className="srv-card-header">
+          <div className="srv-icon-box">
+            {service.icon}
           </div>
+          <h3 className="srv-card-title">{service.title}</h3>
+        </div>
 
-          <div
-            className="relative pl-4 mb-5 py-2 rounded-r-lg transition-all duration-200"
-            style={{
-              background: isHovered ? `${service.accentColor}08` : 'rgba(255,255,255,0.02)',
-              borderLeft: `2px solid ${isHovered ? service.accentColor : 'rgba(255,255,255,0.1)'}`,
-            }}
-          >
-            <span
-              className="text-[10px] font-semibold tracking-[0.2em] uppercase mb-1 block transition-colors duration-150"
-              style={{ color: isHovered ? `${service.accentColor}99` : 'rgba(255,255,255,0.2)' }}
-            >
-              Pain point
-            </span>
-            <p
-              className="text-sm italic leading-relaxed transition-colors duration-150"
-              style={{ color: isHovered ? 'rgba(255,255,255,0.7)' : 'rgba(255,255,255,0.45)' }}
-            >
-              &ldquo;{service.problem}&rdquo;
-            </p>
-          </div>
+        {/* Pain Point Section */}
+        <div className="srv-pain-box">
+          <div className="srv-pain-label">Pain Point</div>
+          <p className="srv-pain-text">&ldquo;{service.problem}&rdquo;</p>
+        </div>
 
-          <p
-            className="text-sm leading-relaxed mb-auto transition-colors duration-150"
-            style={{ color: isHovered ? 'rgba(255,255,255,0.55)' : 'rgba(255,255,255,0.4)' }}
-          >
-            {service.solution}
-          </p>
+        {/* Solution Body */}
+        <p className="srv-solution-text">{service.solution}</p>
 
-          <div
-            className="mt-6 pt-4 transition-all duration-200"
-            style={{
-              borderTop: `1px solid ${isHovered ? `${service.accentColor}12` : 'rgba(255,255,255,0.03)'}`,
-            }}
-          >
-            <span
-              className="inline-flex items-center gap-2 text-xs font-semibold tracking-wide uppercase transition-all duration-200"
-              style={{ color: isHovered ? service.accentColor : 'rgba(255,255,255,0.25)' }}
+        {/* Action Link Footer */}
+        <div className="srv-card-footer">
+          <span className="srv-learn-more">
+            Learn more
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 12 12"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="srv-arrow-icon"
             >
-              Learn more
-              <svg
-                width="12"
-                height="12"
-                viewBox="0 0 12 12"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="transition-transform duration-200"
-                style={{ transform: isHovered ? 'translateX(4px)' : 'translateX(0)' }}
-              >
-                <path d="M2 6h8M7 3l3 3-3 3" />
-              </svg>
-            </span>
-          </div>
+              <path d="M2 6h8M7 3l3 3-3 3" />
+            </svg>
+          </span>
         </div>
       </div>
     </div>
@@ -294,33 +239,36 @@ export default function Services() {
   const gridRef = useReveal(0.05)
 
   return (
-    <section id="services" className="relative bg-[#030d1e] py-28 md:py-36 px-6 md:px-12 overflow-hidden" aria-labelledby="services-heading">
-      <div className="absolute inset-0 dot-pattern opacity-40 pointer-events-none" aria-hidden="true" />
-      <div className="absolute top-0 right-0 w-[700px] h-[600px] bg-cyan-500/[0.025] blur-[140px] rounded-full pointer-events-none" aria-hidden="true" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[400px] bg-blue-600/[0.03] blur-[120px] rounded-full pointer-events-none" aria-hidden="true" />
-      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-cyan-400/20 to-transparent pointer-events-none" aria-hidden="true" />
-      <div className="absolute top-1/4 left-[8%] w-72 h-72 rounded-full opacity-30 pointer-events-none orb-float" style={{ background: 'radial-gradient(circle, rgba(34,211,238,0.05) 0%, transparent 70%)' }} aria-hidden="true" />
-      <div className="absolute bottom-1/4 right-[8%] w-56 h-56 rounded-full opacity-20 pointer-events-none orb-float-2" style={{ background: 'radial-gradient(circle, rgba(59,130,246,0.05) 0%, transparent 70%)' }} aria-hidden="true" />
+    <section id="services" className="srv-section" aria-labelledby="services-heading">
+      {/* Decorative Grid Patterns & Ambient Light */}
+      <div className="srv-dot-pattern" aria-hidden="true" />
+      <div className="srv-glow-top-right" aria-hidden="true" />
+      <div className="srv-glow-bottom-left" aria-hidden="true" />
+      
+      {/* Animated Flowing Line */}
+      <div className="srv-divider-line" aria-hidden="true" />
 
-      <div className="relative mx-auto max-w-7xl">
-        <header ref={headerRef as React.RefObject<HTMLDivElement>} className="reveal text-center max-w-3xl mx-auto mb-16 md:mb-20">
-          <span className="section-label mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" aria-hidden="true" />
-            Our services
+      <div className="srv-container">
+        <header ref={headerRef as React.RefObject<HTMLDivElement>} className="srv-header reveal">
+          <span className="srv-badge">
+            <span className="srv-badge-dot" aria-hidden="true" />
+            Our Services
           </span>
-          <h2 id="services-heading" className="mt-5 text-4xl md:text-5xl lg:text-[3.5rem] font-bold tracking-tight text-white leading-[1.08]">
+          
+          <h2 id="services-heading" className="srv-title">
             Comprehensive cloud services{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-blue-300 to-indigo-300">
+            <span className="srv-title-gradient">
               built for scale
             </span>
           </h2>
-          <p className="mt-5 text-base md:text-lg text-white/40 leading-relaxed max-w-2xl mx-auto">
+          
+          <p className="srv-subtitle">
             From migration to managed infrastructure, security to cost optimization — we deliver enterprise-grade cloud solutions that align technology with business outcomes.
           </p>
         </header>
 
-        <div ref={gridRef as React.RefObject<HTMLDivElement>} className="reveal" style={{ transitionDelay: '100ms' }}>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
+        <div ref={gridRef as React.RefObject<HTMLDivElement>} className="srv-grid-wrapper reveal">
+          <div className="srv-grid">
             {services.map((service, i) => (
               <ServiceCard key={service.title} service={service} index={i} />
             ))}
