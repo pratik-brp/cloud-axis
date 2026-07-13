@@ -271,7 +271,7 @@ export default function Hero() {
             </div>
 
             {/* Hero image — hidden on small mobile, shown from sm up */}
-            <div className="hidden sm:flex relative items-center justify-center animate-fade-in-scale animate-delay-100">
+            <div className="flex relative items-center justify-center animate-fade-in-scale animate-delay-100">
               <div
                 className="absolute w-[280px] h-[280px] sm:w-[360px] sm:h-[360px] md:w-[440px] md:h-[440px] lg:w-[500px] lg:h-[500px] rounded-full pointer-events-none"
                 style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.85) 0%, rgba(200,235,245,0.35) 40%, rgba(20,70,120,0.05) 70%, transparent 80%)' }}
