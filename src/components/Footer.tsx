@@ -29,7 +29,7 @@ const contactLinks = [
   },
   {
     label: 'Baluwatar, Kathmandu, Nepal 44600',
-    href: 'https://maps.google.com/?q=Baluwatar+Kathmandu+Nepal',
+    href: 'https://www.google.com/maps?q=27.723077,85.330460&z=15',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 shrink-0">
         <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />

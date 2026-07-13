@@ -49,7 +49,7 @@ const contactInfo = [
     ),
     label: 'Office',
     value: 'Baluwatar, Kathmandu, Nepal 44600',
-    href: 'https://maps.google.com/?q=Baluwatar+Kathmandu+Nepal',
+    href: 'https://www.google.com/maps?q=27.723077,85.330460&z=15',
   },
   {
     icon: (
