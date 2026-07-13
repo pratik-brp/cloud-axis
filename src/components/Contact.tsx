@@ -108,7 +108,7 @@ export default function Contact() {
 
     setSubmitStatus('submitting')
     try {
-      const res = await fetch('https://formsubmit.co/ajax/info@cloudaxisnp.com', {
+      const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
