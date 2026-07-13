@@ -1,6 +1,5 @@
 import { useState, type FormEvent } from 'react'
 import { useReveal } from '../hooks/useReveal'
-import { useSecurity } from '../hooks/useSecurity'
 import Button from './ui/Button'
 
 interface FormData {
@@ -89,7 +88,6 @@ export default function Contact() {
   const [submitStatus, setSubmitStatus] = useState<SubmitStatus>('idle')
   const headerRef = useReveal<HTMLDivElement>(0.1, 'visible')
   const contentRef = useReveal<HTMLDivElement>(0.05, 'visible')
-  const { secureFetch } = useSecurity()
 
   const updateField = (field: keyof FormData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
@@ -110,19 +108,13 @@ export default function Contact() {
 
     setSubmitStatus('submitting')
     try {
-      const res = await secureFetch('/api/contact', {
+      const res = await fetch('https://formsubmit.co/ajax/info@cloudaxisnp.com', {
         method: 'POST',
-        body: JSON.stringify(formData),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...formData, _captcha: 'false', _subject: `Cloud Axis contact: ${formData.email}` }),
       })
-
-      if (res.status === 429) {
-        setSubmitStatus('error')
-        setErrors({ name: 'Too many requests. Please wait a moment and try again.' })
-        return
-      }
-
       const data = await res.json()
-      if (!res.ok) throw new Error(data.error || 'Failed to send')
+      if (data.success !== 'true') throw new Error(data.message || 'Failed to send')
       setSubmitStatus('success')
     } catch {
       setSubmitStatus('error')
