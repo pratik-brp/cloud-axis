@@ -108,12 +108,13 @@ export default function Contact() {
 
     setSubmitStatus('submitting')
     try {
-      const res = await fetch('/api/contact', {
+      const res = await fetch('https://formsubmit.co/ajax/info@cloudaxisnp.com', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, _captcha: 'false', _subject: `Cloud Axis contact: ${formData.email}` }),
       })
-      if (!res.ok) throw new Error('Failed to send')
+      const data = await res.json()
+      if (data.success !== 'true') throw new Error(data.message || 'Failed to send')
       setSubmitStatus('success')
     } catch {
       setSubmitStatus('error')

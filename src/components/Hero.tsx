@@ -137,15 +137,13 @@ export default function Hero() {
     setError('')
 
     try {
-      const res = await fetch('/api/contact', {
+      const res = await fetch('https://formsubmit.co/ajax/info@cloudaxisnp.com', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: email, email, company: '', phone: '', message: `New signup request from ${email}` }),
+        body: JSON.stringify({ name: email, email, _captcha: 'false', _subject: `Cloud Axis signup: ${email}`, message: `New signup request from ${email}` }),
       })
-      if (!res.ok) {
-        const data = await res.json().catch(() => ({}))
-        throw new Error(data.error || 'Failed to send')
-      }
+      const data = await res.json()
+      if (data.success !== 'true') throw new Error(data.message || 'Failed to send')
       setSubmitStatus('success')
     } catch (err) {
       setSubmitStatus('error')
