@@ -15,7 +15,6 @@
   --color-text-dimmer: rgba(255,255,255,0.4);
   --color-text-faint: rgba(255,255,255,0.2);
   --radius-card: 1.25rem;
-  --radius-pill: 9999px;
   --ease-out-expo: cubic-bezier(0.16,1,0.3,1);
 }
 
@@ -524,34 +523,7 @@ body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background-co
   text-align: center;
 }
 
-/* ══════════════════════════════════════════
-   NEW SECTION KEYFRAMES
-══════════════════════════════════════════ */
-@keyframes shimmer {
-  0%   { background-position: -200% center; }
-  100% { background-position:  200% center; }
-}
-@keyframes gradientShift {
-  0%, 100% { background-position: 0% 50%; }
-  50%       { background-position: 100% 50%; }
-}
-@keyframes revealUp {
-  from { opacity: 0; transform: translateY(48px) scale(0.97); }
-  to   { opacity: 1; transform: translateY(0)   scale(1); }
-}
-@keyframes borderGlow {
-  0%, 100% { border-color: rgba(34,211,238,0.15); box-shadow: 0 0 0 0 rgba(34,211,238,0); }
-  50%       { border-color: rgba(34,211,238,0.40); box-shadow: 0 0 20px 4px rgba(34,211,238,0.08); }
-}
-@keyframes orbFloat {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33%       { transform: translate(20px, -30px) scale(1.05); }
-  66%       { transform: translate(-15px, 20px) scale(0.97); }
-}
-@keyframes tickIn {
-  0%   { transform: scale(0); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
-}
+
 
 /* ══════════════════════════════════════════
    ORIGINAL HERO UTILITY CLASSES
@@ -623,22 +595,6 @@ body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background-co
   transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1);
 }
 .reveal-scale.visible { opacity: 1; transform: scale(1); }
-
-/* Glass card */
-.glass-card {
-  background: rgba(255,255,255,0.025);
-  border: 1px solid rgba(255,255,255,0.07);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-radius: 1rem;
-  transition: all 0.35s var(--ease-out-expo);
-}
-.glass-card:hover {
-  background: rgba(255,255,255,0.05);
-  border-color: rgba(34,211,238,0.2);
-  transform: translateY(-4px);
-  box-shadow: 0 24px 64px rgba(0,0,0,0.45), 0 0 0 1px rgba(34,211,238,0.08);
-}
 
 /* ══════════════════════════════════════════
    SERVICES SECTION v2
@@ -1049,7 +1005,6 @@ body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background-co
   opacity: 1;
 }
 
-.st-card:hover .st-icon-box, 
 .st-card:hover .st-icon-container {
   color: var(--accent-from);
   border-color: rgba(255,255,255,0.15);

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { useNavigate, useLocation } from '@tanstack/react-router'
 import cloudaxisLogo from '../assets/cloudaxis-logo.png'
 
@@ -44,11 +44,52 @@ export default function Navbar() {
   const activeSection = useActiveSection()
   const isHome = location.pathname === '/'
 
+  const menuRef = useRef<HTMLDivElement>(null)
+  const toggleRef = useRef<HTMLButtonElement>(null)
+
+  const trapFocus = useCallback((e: KeyboardEvent) => {
+    if (!menuRef.current) return
+    const focusable = menuRef.current.querySelectorAll<HTMLElement>(
+      'a[href], button, [tabindex]:not([tabindex="-1"])'
+    )
+    if (focusable.length === 0) return
+    const first = focusable[0]
+    const last = focusable[focusable.length - 1]
+    if (e.key === 'Tab') {
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault()
+          last.focus()
+        }
+      } else {
+        if (document.activeElement === last) {
+          e.preventDefault()
+          first.focus()
+        }
+      }
+    }
+    if (e.key === 'Escape') {
+      setMobileOpen(false)
+      toggleRef.current?.focus()
+    }
+  }, [])
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60)
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+
+  useEffect(() => {
+    if (!mobileOpen) return
+    document.addEventListener('keydown', trapFocus)
+    document.body.style.overflow = 'hidden'
+    menuRef.current?.querySelector<HTMLElement>('a, button')?.focus()
+    return () => {
+      document.removeEventListener('keydown', trapFocus)
+      document.body.style.overflow = ''
+    }
+  }, [mobileOpen, trapFocus])
 
   const handleClick = (e: React.MouseEvent, link: (typeof navLinks)[0]) => {
     e.preventDefault()
@@ -123,9 +164,12 @@ export default function Navbar() {
         </div>
 
         <button
+          ref={toggleRef}
           className="md:hidden p-2 text-white/80 hover:text-white"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
+          aria-expanded={mobileOpen}
+          aria-controls="mobile-menu"
         >
           {mobileOpen ? (
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -140,7 +184,14 @@ export default function Navbar() {
       </div>
 
       {mobileOpen && (
-        <div className="md:hidden absolute left-0 right-0 top-full mx-4 rounded-2xl border border-white/[0.08] bg-[#0d1b2a]/95 backdrop-blur-2xl shadow-2xl overflow-hidden animate-fade-in-down">
+        <div
+          id="mobile-menu"
+          ref={menuRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Navigation menu"
+          className="md:hidden absolute left-0 right-0 top-full mx-4 rounded-2xl border border-white/[0.08] bg-[#0d1b2a]/95 backdrop-blur-2xl shadow-2xl overflow-hidden animate-fade-in-down"
+        >
           <ul className="flex flex-col py-3">
             {navLinks.map((link) => (
               <li key={link.label}>

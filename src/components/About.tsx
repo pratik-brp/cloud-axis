@@ -181,7 +181,7 @@ export default function About() {
               </div>
 
               <p className="ab-card-text-primary">
-               Empowering organizations through secure, scalable, and expertly managed cloud solution-driving innovation, resilience, and sustainable growth across Nepal and beyond.
+               Empowering organizations through secure, scalable, and expertly managed cloud solution driving innovation, resilience, and sustainable growth across Nepal and beyond.
               </p>
 
               <p className="ab-card-text-secondary">
