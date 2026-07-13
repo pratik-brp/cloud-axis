@@ -105,6 +105,10 @@ function TypewriterHeading() {
 }
 
 export default function Hero() {
+  const [email, setEmail] = useState('')
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
+  const [error, setError] = useState('')
+
   useEffect(() => {
     const link = document.createElement('link')
     link.rel = 'preload'
@@ -114,6 +118,36 @@ export default function Hero() {
     document.head.appendChild(link)
     return () => { if (link.parentNode) document.head.removeChild(link) }
   }, [])
+
+  const validateEmail = (value: string) => {
+    if (!value.trim()) return 'Email is required'
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return 'Please enter a valid email'
+    return ''
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    const validationError = validateEmail(email)
+    if (validationError) {
+      setError(validationError)
+      return
+    }
+
+    setSubmitStatus('submitting')
+    setError('')
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: '', email, company: '', phone: '', message: `New signup request from ${email}` }),
+      })
+      if (!res.ok) throw new Error('Failed to send')
+      setSubmitStatus('success')
+    } catch {
+      setSubmitStatus('error')
+    }
+  }
 
   return (
     <div
@@ -159,19 +193,61 @@ export default function Hero() {
               </p>
 
               <div className="mt-5 sm:mt-8 w-full max-w-md animate-fade-in-up animate-delay-400">
-                <div className="flex flex-col gap-2 p-1.5 rounded-2xl bg-white/[0.05] border border-white/10 backdrop-blur-sm">
-                  <input
-                    type="email"
-                    placeholder="Enter your email"
-                    className="w-full px-4 py-3 rounded-xl bg-white/[0.04] text-white text-sm placeholder:text-white/35 outline-none focus:bg-white/[0.08] focus:ring-1 focus:ring-cyan-300/30 transition-all duration-200"
-                  />
-                  <button className="w-full px-5 py-3 rounded-xl text-sm font-semibold text-white bg-gradient-to-b from-[#5cb8f0] to-[#2b7fc0] hover:from-[#6fc3f7] hover:to-[#3a8fd1] transition-all duration-200 shadow-lg shadow-blue-500/25">
-                    Get Started
-                  </button>
-                </div>
-                <p className="mt-2 text-white/40 text-xs pl-2">
-                  Start your 14-day trial. No credit card required.
-                </p>
+                {submitStatus === 'success' ? (
+                  <div className="p-6 rounded-2xl bg-white/[0.05] border border-white/10 backdrop-blur-sm text-center">
+                    <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-green-500/20 flex items-center justify-center">
+                      <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6 text-green-400" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
+                        <polyline points="22 4 12 14.01 9 11.01" />
+                      </svg>
+                    </div>
+                    <h4 className="text-white font-semibold text-base">You&apos;re on the list!</h4>
+                    <p className="text-white/50 text-xs mt-1">Check your inbox for next steps.</p>
+                  </div>
+                ) : (
+                  <>
+                    <form onSubmit={handleSubmit} className="flex flex-col gap-2 p-1.5 rounded-2xl bg-white/[0.05] border border-white/10 backdrop-blur-sm">
+                      <div>
+                        <input
+                          type="email"
+                          placeholder="Enter your email"
+                          value={email}
+                          onChange={(e) => { setEmail(e.target.value); if (error) setError('') }}
+                          aria-invalid={!!error}
+                          aria-describedby={error ? 'hero-email-error' : undefined}
+                          className="w-full px-4 py-3 rounded-xl bg-white/[0.04] text-white text-sm placeholder:text-white/35 outline-none focus:bg-white/[0.08] focus:ring-1 focus:ring-cyan-300/30 transition-all duration-200"
+                        />
+                        {error && (
+                          <p id="hero-email-error" className="text-red-400 text-xs mt-1.5 pl-1" role="alert">{error}</p>
+                        )}
+                      </div>
+                      <button
+                        type="submit"
+                        disabled={submitStatus === 'submitting'}
+                        className="w-full px-5 py-3 rounded-xl text-sm font-semibold text-white bg-gradient-to-b from-[#5cb8f0] to-[#2b7fc0] hover:from-[#6fc3f7] hover:to-[#3a8fd1] transition-all duration-200 shadow-lg shadow-blue-500/25 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2"
+                      >
+                        {submitStatus === 'submitting' && (
+                          <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
+                          </svg>
+                        )}
+                        {submitStatus === 'submitting' ? 'Submitting...' : 'Get Started'}
+                      </button>
+                    </form>
+                    {submitStatus === 'error' && (
+                      <p className="mt-2 text-red-400/70 text-xs pl-2" role="alert">
+                        Something went wrong. Please try again or email{' '}
+                        <a href="mailto:info@cloudaxisnp.com" className="underline">info@cloudaxisnp.com</a>.
+                      </p>
+                    )}
+                    {submitStatus === 'idle' && (
+                      <p className="mt-2 text-white/40 text-xs pl-2">
+                        Start your 14-day trial. No credit card required.
+                      </p>
+                    )}
+                  </>
+                )}
               </div>
 
               <div className="mt-6 sm:mt-8 flex items-center gap-5 sm:gap-8 text-white/50 animate-fade-in-up animate-delay-500">

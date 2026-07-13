@@ -1172,6 +1172,7 @@ body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background-co
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.25rem;
+  align-items: stretch;
 }
 @media (min-width: 640px) { .con-grid { gap: 2rem; } }
 @media (min-width: 1024px) {
@@ -1182,6 +1183,7 @@ body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background-co
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  align-items: stretch;
 }
 
 /* Glass form card */
@@ -1193,6 +1195,9 @@ body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background-co
   padding: 1.5rem;
   overflow: hidden;
   box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 @media (min-width: 640px) { .con-card-form { padding: 2.25rem; } }
 @media (min-width: 768px) { .con-card-form { padding: 3rem; } }
@@ -1384,6 +1389,9 @@ body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background-co
   padding: 1.5rem;
   overflow: hidden;
   box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 @media (min-width: 640px) { .con-card-info { border-radius: 1.5rem; padding: 2.25rem; } }
 
@@ -1462,11 +1470,15 @@ body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background-co
   position: relative;
   border-radius: 1.25rem;
   border: 1px solid rgba(255,255,255,0.08);
-  height: 180px;
+  height: auto;
+  min-height: 180px;
   overflow: hidden;
   box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
 }
-@media (min-width: 640px) { .con-card-map { height: 220px; } }
+@media (min-width: 640px) { .con-card-map { min-height: 220px; } }
 
 .con-map-overlay {
   position: absolute; inset: 0;
@@ -1528,12 +1540,12 @@ body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background-co
 
 .ft-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.75rem;
   padding-bottom: 2.5rem;
   border-bottom: 1px solid rgba(255,255,255,0.04);
 }
-@media (min-width: 640px) { .ft-grid { gap: 3rem; padding-bottom: 4rem; } }
+@media (min-width: 640px) { .ft-grid { gap: 2.5rem; padding-bottom: 4rem; } }
 @media (min-width: 768px) {
   .ft-grid { grid-template-columns: 5fr 3fr 4fr; gap: 2.5rem; }
 }
@@ -1542,6 +1554,10 @@ body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background-co
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
+  grid-column: 1 / -1;
+}
+@media (min-width: 768px) {
+  .ft-col-brand { grid-column: auto; }
 }
 
 .ft-logo-link {
@@ -1559,7 +1575,9 @@ body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background-co
   font-size: 0.88rem;
   color: rgba(255,255,255,0.35);
   line-height: 1.7;
-  max-width: 17rem;
+}
+@media (min-width: 768px) {
+  .ft-brand-desc { max-width: 17rem; }
 }
 
 .ft-col-nav, .ft-col-contact {

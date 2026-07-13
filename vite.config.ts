@@ -4,12 +4,14 @@ import tailwindcss from '@tailwindcss/vite'
 import { TanStackRouterVite } from '@tanstack/router-plugin/vite'
 import { ViteImageOptimizer } from 'vite-plugin-image-optimizer'
 import { visualizer } from 'rollup-plugin-visualizer'
+import devApiPlugin from './api/dev.js'
 
 export default defineConfig({
   plugins: [
     TanStackRouterVite(),
     react(),
     tailwindcss(),
+    devApiPlugin(),
     ViteImageOptimizer({
       png: { quality: 70 },
       jpg: { quality: 70 },

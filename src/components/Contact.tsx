@@ -37,7 +37,7 @@ const contactInfo = [
       </svg>
     ),
     label: 'Phone',
-    value: '+977-9812345789',
+    value: '+977-9803350658',
     href: 'tel:+977-9812345789',
   },
   {
