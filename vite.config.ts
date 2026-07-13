@@ -8,20 +8,6 @@ import devApiPlugin from './api/dev.js'
 
 export default defineConfig({
   plugins: [
-    {
-      name: 'csp-headers',
-      configureServer(server) {
-        server.middlewares.use((req, res, next) => {
-          if (req.url === '/' || req.url === '/index.html') {
-            res.setHeader(
-              'Content-Security-Policy',
-              "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https:; connect-src 'self' https://formsubmit.co https://fonts.googleapis.com https://fonts.gstatic.com; frame-src 'self' https://www.google.com; object-src 'none'; base-uri 'self'; form-action 'self'"
-            )
-          }
-          next()
-        })
-      },
-    },
     TanStackRouterVite(),
     react(),
     tailwindcss(),
