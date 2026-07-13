@@ -13,15 +13,16 @@ export default async function handler(req, res) {
     // Proxy to FormSubmit.co server-to-server (no CORS issues)
     const response = await fetch('https://formsubmit.co/ajax/info@cloudaxisnp.com', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, company, phone, message }),
+      headers: { 'Content-Type': 'application/json', 'Referer': 'https://cloudaxisnp.com', 'Origin': 'https://cloudaxisnp.com' },
+      body: JSON.stringify({ name, email, company, phone, message, _captcha: 'false', _subject: `Cloud Axis: ${email}` }),
     })
 
     const data = await response.json()
 
-    if (!response.ok) {
+    if (!response.ok || data.success === 'false') {
       console.error('FormSubmit error:', data)
-      return res.status(500).json({ error: 'Failed to send email' })
+      const message = data.message || 'Failed to send email'
+      return res.status(500).json({ error: message })
     }
 
     return res.status(200).json({ success: true, ...data })

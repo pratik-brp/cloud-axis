@@ -140,12 +140,16 @@ export default function Hero() {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: '', email, company: '', phone: '', message: `New signup request from ${email}` }),
+        body: JSON.stringify({ name: email, email, company: '', phone: '', message: `New signup request from ${email}` }),
       })
-      if (!res.ok) throw new Error('Failed to send')
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}))
+        throw new Error(data.error || 'Failed to send')
+      }
       setSubmitStatus('success')
-    } catch {
+    } catch (err) {
       setSubmitStatus('error')
+      setError(err instanceof Error ? err.message : 'Something went wrong')
     }
   }
 
@@ -235,10 +239,10 @@ export default function Hero() {
                         {submitStatus === 'submitting' ? 'Submitting...' : 'Get Started'}
                       </button>
                     </form>
-                    {submitStatus === 'error' && (
+                    {submitStatus === 'error' && !error && (
                       <p className="mt-2 text-red-400/70 text-xs pl-2" role="alert">
-                        Something went wrong. Please try again or email{' '}
-                        <a href="mailto:info@cloudaxisnp.com" className="underline">info@cloudaxisnp.com</a>.
+                        Something went wrong.{' '}
+                        <a href="mailto:info@cloudaxisnp.com" className="underline">Email us directly</a>
                       </p>
                     )}
                     {submitStatus === 'idle' && (
