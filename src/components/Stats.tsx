@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 
 const stats = [
   {
-    value: 100, suffix: '%', label: 'Uptime achieved', sublabel: 'verified every month', display: '99.9%',
+    value: 999, divisor: 10, decimalPlaces: 1, suffix: '%', label: 'Uptime achieved', sublabel: 'verified every month',
     accentFrom: '#22d3ee', accentTo: '#0ea5e9',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
@@ -12,7 +12,7 @@ const stats = [
     ),
   },
   {
-    value: 9999, suffix: '%', label: 'SLA uptime', sublabel: 'guaranteed every month', display: '99.99%',
+    value: 9999, divisor: 100, decimalPlaces: 2, suffix: '%', label: 'SLA uptime', sublabel: 'guaranteed every month',
     accentFrom: '#10b981', accentTo: '#059669',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
@@ -65,7 +65,9 @@ function useCountUp(target: number, duration = 1800, start = false) {
 
 function StatCard({ stat, index, inView }: { stat: typeof stats[0]; index: number; inView: boolean }) {
   const count = useCountUp(stat.value, 1800 + index * 150, inView)
-  const displayValue = stat.display ?? `${count.toLocaleString()}${stat.suffix}`
+  const displayValue = stat.divisor
+    ? `${(count / stat.divisor).toFixed(stat.decimalPlaces ?? 0)}${stat.suffix}`
+    : `${count.toLocaleString()}${stat.suffix}`
 
   return (
     <div

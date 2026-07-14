@@ -73,7 +73,7 @@ export default function Footer() {
             </p>
             <div className="flex items-center gap-3 mt-3">
               <a
-                href="https://www.facebook.com/cloudaxisnepal/"
+                href="https://www.facebook.com/profile.php?id=61589896055424"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Cloud Axis on Facebook"
@@ -84,7 +84,7 @@ export default function Footer() {
                 </svg>
               </a>
               <a
-                href="https://www.instagram.com/cloudaxisnepal/"
+                href="https://www.instagram.com/cloudaxis.np/?next=%2Fbrptours_travels%2F"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Cloud Axis on Instagram"

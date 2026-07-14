@@ -245,7 +245,6 @@ export default function Hero() {
                     )}
                     {submitStatus === 'idle' && (
                       <p className="mt-2 text-white/40 text-xs pl-2">
-                        Start your 14-day trial. No credit card required.
                       </p>
                     )}
                   </>
