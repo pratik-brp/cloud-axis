@@ -159,7 +159,7 @@ export default function About() {
 
           <p className="ab-subtitle">
             We set out to build the platform we always wished existed
-            — fast, reliable, and built for the teams who ship.
+            - fast, reliable, and built for the teams who ship.
           </p>
         </div>
 
@@ -185,7 +185,7 @@ export default function About() {
               </p>
 
               <p className="ab-card-text-secondary">
-               At Cloud Axis, our mission is to simplify cloud operations for businesses of all sizes. We partner with organizations to architect, deploy, migrate, secure, monitor, and continuously optimize cloud environments across leading cloud platforms. Through proactive management, automation, security-first practices, and 24×7 operational support, we help businesses improve reliability, reduce operational risk, and accelerate digital transformation with confidence.
+               At Cloud Axis, Our mission is to simplify cloud operations for businesses of all sizes. We partner with organizations to architect, deploy, migrate, secure, monitor, and continuously optimize cloud environments across leading cloud platforms. Through proactive management, automation, security-first practices, and 24×7 operational support, we help businesses improve reliability, reduce operational risk, and accelerate digital transformation with confidence.
               </p>
 
               {/* Stats row */}
